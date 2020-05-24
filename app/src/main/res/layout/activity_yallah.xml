@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.yallah">
+
+        <fragment
+            android:id="@+id/map_cus_yallah"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <ImageButton
+            android:id="@+id/backtohome"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/arrow_back">
+
+        </ImageButton>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardPreventCornerOverlap="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fromto">
+
+                </ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp"
+                    android:textDirection="ltr">
+
+                    <TextView
+                        android:id="@+id/current_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="Current location"
+                        android:textColor="#000"
+                        android:textDirection="ltr">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/tolocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="to location"
+                        android:textColor="#000"
+                        android:textDirection="ltr">
+
+                    </TextView>
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_reach"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginRight="60dp"
+            app:cardCornerRadius="10dp"
+            android:visibility="invisible"
+            app:cardBackgroundColor="#fff"
+            app:cardPreventCornerOverlap="true"
+            >
+                    <TextView
+                        android:id="@+id/DriverReached"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="There is no car in this area"
+                        android:gravity="center"
+                        android:textColor="#33cc66"
+                        android:paddingLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingRight="20dp"
+                        android:textSize="15dp"
+                        android:textDirection="ltr">
+                    </TextView>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_info"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_above="@+id/jj"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:visibility="invisible"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="10dp"
+            app:cardPreventCornerOverlap="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:paddingRight="10dp"
+                android:textDirection="ltr">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="name"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textDirection="ltr">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="phone"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textDirection="ltr">
+
+                </TextView>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:textDirection="ltr">
+
+                    <ImageView
+                        android:id="@+id/close_request_p"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="45dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/close" />
+
+                    <ImageView
+                        android:id="@+id/phone_p"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/phone"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:id="@+id/jj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/yalhah"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="Yallah !"
+                android:textColor="#fff"
+                android:textAllCaps="false"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:background="@drawable/btn_call_car"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

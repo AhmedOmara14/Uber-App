@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.ui_driver.home_drive.HomeFragment_drive">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_info_cus"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginEnd="49dp"
+            android:visibility="invisible"
+            android:layout_marginRight="49dp"
+            android:layout_marginBottom="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardPreventCornerOverlap="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp"
+                    android:textDirection="ltr">
+
+                    <TextView
+                        android:id="@+id/name_cus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="name"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textDirection="ltr">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/phone_cus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
+                        android:text="phone"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:textStyle="bold"                        android:textDirection="ltr">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:textDirection="ltr">
+
+                    <ImageView
+                        android:id="@+id/close_requestll"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginLeft="45dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/close" />
+
+                    <ImageView
+                        android:id="@+id/phone_fromdrive"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/phone" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <data>
+
+    </data>
+</layout>

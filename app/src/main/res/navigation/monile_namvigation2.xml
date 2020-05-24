@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation2"
+    app:startDestination="@+id/nav_home_cus"
+>
+
+    <fragment
+        android:id="@+id/nav_home_cus"
+        android:name="com.example.uberapp.ui.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
+            app:destination="@id/nav_home_second_" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_home_second_"
+        android:name="com.example.uberapp.ui.ui.home.HomeSecondFragment"
+        android:label="@string/home_second"
+        tools:layout="@layout/fragment_home_second">
+        <action
+            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
+            app:destination="@id/nav_home_cus" />
+
+        <argument
+            android:name="myArg"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery_cus"
+        android:name="com.example.uberapp.ui.ui.gallery.GalleryFragment"
+        android:label="Gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+</navigation>

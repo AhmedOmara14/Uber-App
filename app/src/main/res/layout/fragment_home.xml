@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ui.home.HomeFragment"
+    >
+
+    <fragment
+        android:id="@+id/map_cus"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/jj"
+        android:layout_alignParentTop="true" />
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_location"
+        android:layout_marginTop="20dp"
+        android:textDirection="ltr"
+        android:layout_marginLeft="10dp"
+        android:queryHint="Search"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/back_search"
+        android:layout_marginRight="10dp"
+        />
+    <LinearLayout
+        android:id="@+id/jj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true">
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Confirm pickup"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:background="@drawable/btn_call_car"
+        />
+    </LinearLayout>
+
+</RelativeLayout>
