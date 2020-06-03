@@ -6,5 +6,9 @@
         android:orderInCategory="100"
         android:title="@string/action_logout"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/ettings_cus"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 </menu>

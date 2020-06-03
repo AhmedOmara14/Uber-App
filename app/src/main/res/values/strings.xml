@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Uberapp</string>
+    <string name="app_name">Uber</string>
     <string name="title_activity_driver_map">driver_map</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

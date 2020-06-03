@@ -99,7 +99,7 @@ public class HomeFragment_drive extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         LatLng latLng = new LatLng(currentlocation.getLatitude(), currentlocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng)
-                .title("I am here").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
+                .title("I am here");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         googleMap.addMarker(markerOptions);

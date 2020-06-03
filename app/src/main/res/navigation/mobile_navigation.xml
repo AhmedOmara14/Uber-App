@@ -29,10 +29,6 @@
             app:argType="string" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.uberapp.ui.ui_driver.gallery_drive.GalleryFragment_drive"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery_drive" />
+
 
 </navigation>

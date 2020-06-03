@@ -34,6 +34,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.uberapp.R;
 import com.example.uberapp.data.Repositry;
 import com.example.uberapp.pojo.location;
+import com.example.uberapp.ui.DirectionHelper.FetchURL;
+import com.example.uberapp.ui.DirectionHelper.TaskLoadedCallback;
 import com.example.uberapp.ui.login_customer;
 import com.example.uberapp.ui.yallah;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -45,6 +47,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +60,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class HomeFragment extends Fragment implements OnMapReadyCallback  {
 
     DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Location_customers");
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -65,7 +69,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     SupportMapFragment supportMapFragment;
     android.widget.SearchView searchView;
     Button confirm;
+    GoogleMap mMap;
     ImageView gg;
+    Polyline polyline;
     DatePickerDialog.OnDateSetListener onDateSetListener;
     private static final int REQUEST_CODE = 101;
     Repositry repositry;
@@ -98,12 +104,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap=googleMap;
         LatLng latLng = new LatLng(currentlocation.getLatitude(), currentlocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng)
                 .title("I am here");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         googleMap.addMarker(markerOptions);
+        mMap.addMarker(markerOptions);
         List<Address> addresses = null;
         Geocoder geocoder = new Geocoder(getContext());
         try {
@@ -173,8 +181,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                                 intent.putExtra("Latitude_tolocation", address.getLatitude() + "");
                                 intent.putExtra("Longitude_tolocation", address.getLongitude() + "");
                                 intent.putExtra("Longitude_tolocation", address.getLongitude() + "");
-     //                          intent.putExtra("Longitude_tolocation",  year_ + "/" + month_ + "/" + day_);
                                 startActivity(intent);
+
                             }
                         });
 
@@ -253,5 +261,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 break;
         }
     }
+
 
 }

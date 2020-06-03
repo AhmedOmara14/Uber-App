@@ -31,10 +31,4 @@
             app:argType="string" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_gallery_cus"
-        android:name="com.example.uberapp.ui.ui.gallery.GalleryFragment"
-        android:label="Gallery"
-        tools:layout="@layout/fragment_gallery" />
-
 </navigation>

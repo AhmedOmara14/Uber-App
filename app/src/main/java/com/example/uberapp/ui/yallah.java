@@ -12,8 +12,10 @@ import androidx.lifecycle.ViewModelProviders;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,8 @@ import com.example.uberapp.data.Repositry;
 import com.example.uberapp.databinding.ActivityYallahBinding;
 import com.example.uberapp.pojo.info;
 import com.example.uberapp.pojo.location;
+import com.example.uberapp.ui.DirectionHelper.FetchURL;
+import com.example.uberapp.ui.DirectionHelper.TaskLoadedCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,6 +39,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,16 +50,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import static java.security.AccessController.getContext;
 
-public class yallah extends FragmentActivity implements OnMapReadyCallback {
+public class yallah extends FragmentActivity implements OnMapReadyCallback , TaskLoadedCallback {
     ActivityYallahBinding binding;
     private String currentlocation, Latitude_currentlocation, Longitude_currentlocation, tolocation, Latitude_tolocation, Longitude_tolocation;
     Location location;
+    Polyline polyline;
+    GoogleMap mMap;
     FusedLocationProviderClient fusedLocationProviderClient;
     Repositry repositry;
     private static final String TAG = "yallah";
@@ -131,19 +149,20 @@ public class yallah extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap=googleMap;
         LatLng latLng = new LatLng(Double.parseDouble(Latitude_currentlocation), Double.parseDouble(Longitude_currentlocation));
         MarkerOptions markerOptions = new MarkerOptions().position(latLng)
                 .title(currentlocation);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-        googleMap.addMarker(markerOptions);
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        mMap.addMarker(markerOptions);
 
         LatLng latLng1 = new LatLng(Double.parseDouble(Latitude_tolocation), Double.parseDouble(Longitude_tolocation));
         MarkerOptions markerOptions1 = new MarkerOptions().position(latLng1)
                 .title(tolocation);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng1));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 15));
-        googleMap.addMarker(markerOptions1);
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng1));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng1, 15));
+        mMap.addMarker(markerOptions1);
 
         Location location2 = new Location("");
         Location location = new Location("");
@@ -229,6 +248,9 @@ public class yallah extends FragmentActivity implements OnMapReadyCallback {
             }
         });
 
+     //   String Url=getDirectionsUrl(latLng,latLng1);
+      // new FetchURL(yallah.this).execute(Url,"driving");
+
 
     }
 
@@ -242,4 +264,16 @@ public class yallah extends FragmentActivity implements OnMapReadyCallback {
                 break;
         }
     }
+
+
+
+    @Override
+    public void onTaskDone(Object... values) {
+        if (polyline != null)
+            polyline.remove();
+        polyline = mMap.addPolyline((PolylineOptions) values[0]);
+    }
+
+
+
 }
