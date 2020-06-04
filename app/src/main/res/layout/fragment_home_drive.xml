@@ -16,19 +16,27 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginEnd="49dp"
-            android:visibility="invisible"
-            android:layout_marginRight="49dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="30dp"
             app:cardCornerRadius="10dp"
+            android:visibility="invisible"
             app:cardPreventCornerOverlap="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_dri"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/backtohome"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/profile_image"
+                    app:civ_border_color="#FF000000" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -46,8 +54,7 @@
                         android:layout_marginBottom="20dp"
                         android:text="name"
                         android:textColor="#000"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
+                        android:textSize="18dp"
                         android:textDirection="ltr">
 
                     </TextView>
@@ -59,8 +66,8 @@
                         android:paddingRight="10dp"
                         android:text="phone"
                         android:textColor="#000"
-                        android:textSize="20dp"
-                        android:textStyle="bold"                        android:textDirection="ltr">
+                        android:textSize="18dp"
+                        android:textDirection="ltr">
 
                     </TextView>
 
@@ -84,8 +91,7 @@
                         android:id="@+id/phone_fromdrive"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:padding="10dp"
+                        android:layout_marginTop="10dp"
                         android:src="@drawable/phone" />
 
                 </LinearLayout>

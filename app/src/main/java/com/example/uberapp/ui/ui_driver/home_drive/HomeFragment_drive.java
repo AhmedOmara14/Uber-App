@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.uberapp.R;
 import com.example.uberapp.data.Repositry;
 import com.example.uberapp.pojo.Customer_Request;
+import com.example.uberapp.pojo.info;
 import com.example.uberapp.ui.login_driver;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -47,9 +48,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeFragment_drive extends Fragment implements OnMapReadyCallback {
 
@@ -61,8 +65,10 @@ public class HomeFragment_drive extends Fragment implements OnMapReadyCallback {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private static final int REQUEST_CODE = 101;
     CardView cardView;
+    CircleImageView circleImageView;
     TextView name, phone;
     Repositry repositry;
+    private static final String TAG = "HomeFragment_drive";
     ImageView btn_close;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,6 +76,7 @@ public class HomeFragment_drive extends Fragment implements OnMapReadyCallback {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
         repositry = ViewModelProviders.of(this).get(Repositry.class);
         cardView = root.findViewById(R.id.card_info_cus);
+        circleImageView=root.findViewById(R.id.profile_dri);
         name = root.findViewById(R.id.name_cus);
         phone = root.findViewById(R.id.phone_cus);
         btn_close = root.findViewById(R.id.close_requestll);
@@ -106,39 +113,49 @@ public class HomeFragment_drive extends Fragment implements OnMapReadyCallback {
         FirebaseDatabase.getInstance().getReference().child("Customer_Request").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: "+dataSnapshot.child("id").getValue());
+
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
                     String kk = currentlocation.getLatitude() + "";
-                    String id = dataSnapshot1.child("id").getValue() + "";
+                    String id = dataSnapshot1.child("id").getValue().toString();
                     String lat = dataSnapshot1.child("Latitude_currentdriver").getValue().toString();
                     String lon = dataSnapshot1.child("Longitude_currentdriver").getValue().toString();
                     if (kk.equals(lat)) {
                         if (lon.equals(currentlocation.getLongitude() + "")) {
                             cardView.setVisibility(View.VISIBLE);
-                            FirebaseDatabase.getInstance().getReference().child("Customers").
-                                    child(id).addValueEventListener(new ValueEventListener() {
+
+                            FirebaseDatabase.getInstance().getReference().child("Customers").child(id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    name.setText(dataSnapshot.child("email").getValue().toString());
-                                    phone.setText(dataSnapshot.child("phone").getValue().toString());
-                                    cardView.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
-                                            MarkerOptions markerOptions = new MarkerOptions().position(latLng)
-                                                    .title("your customer is here");
-                                            googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                                            googleMap.addMarker(markerOptions);
-                                        }
-                                    });
+                                    Log.d(TAG, "onDataChange: "+dataSnapshot.child("image"));
+                                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                                        Picasso.get().load(dataSnapshot.child("image").getValue().toString()).placeholder(R.drawable.profile_image)
+                                               .error(R.drawable.profile_image).into(circleImageView);
+                                        name.setText(dataSnapshot.child("name").getValue().toString());
+                                        phone.setText(dataSnapshot.child("phone").getValue().toString());
+                                        cardView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
+                                                MarkerOptions markerOptions = new MarkerOptions()
+                                                        .position(latLng)
+                                                        .title("your customer is here");
+                                                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                                                googleMap.addMarker(markerOptions);
+                                            }
+                                        });
+                                    }
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                                    Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+
                                 }
                             });
+
                         }
                     } else {
                         Toast.makeText(getContext(), "no", Toast.LENGTH_SHORT).show();

@@ -49,6 +49,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -204,16 +205,15 @@ public class yallah extends FragmentActivity implements OnMapReadyCallback , Tas
                                                     for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                                                         Toast.makeText(yallah.this, dataSnapshot2.getKey(), Toast.LENGTH_SHORT).show();
                                                         if (dataSnapshot1.getKey().equals(dataSnapshot2.getKey())) {
-                                                            reference.child("Drivers").child(dataSnapshot1.getKey()).addValueEventListener(new ValueEventListener() {
-                                                                @Override
-                                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                    binding.cardInfo.setVisibility(View.VISIBLE);
-                                                                    binding.name.setText(dataSnapshot.child("email").getValue().toString());
-                                                                    binding.phone.setText(dataSnapshot.child("phone").getValue().toString());
-                                                                }
 
+                                                            repositry.getData_driver(dataSnapshot1.getKey()).observe(yallah.this, new Observer<List<info>>() {
                                                                 @Override
-                                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                                public void onChanged(List<info> infos) {
+                                                                        binding.cardInfo.setVisibility(View.VISIBLE);
+                                                                        binding.name.setText(infos.get(0).getName());
+                                                                        binding.phone.setText(infos.get(0).getPhone());
+                                                                        Picasso.get().load(infos.get(0).getImage()).placeholder(R.drawable.profile_image)
+                                                                                .error(R.drawable.profile_image).into(binding.profileTolocation);
 
                                                                 }
                                                             });

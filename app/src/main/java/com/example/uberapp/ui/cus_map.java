@@ -52,7 +52,7 @@ public class cus_map extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cus_map);
-        Toolbar toolbar = findViewById(R.id.toolbar_);
+        Toolbar toolbar = findViewById(R.id.toolbar_l);
         setSupportActionBar(toolbar);
 
         if (firebaseUser == null) {
@@ -76,7 +76,7 @@ public class cus_map extends AppCompatActivity {
                         Toast.makeText(cus_map.this, "welcome", Toast.LENGTH_SHORT).show();
                         currentuserid = auth.getCurrentUser().getUid();
                         repositry = ViewModelProviders.of(cus_map.this).get(Repositry.class);
-                        Toolbar toolbar = findViewById(R.id.toolbar_);
+                        Toolbar toolbar = findViewById(R.id.toolbar_l);
                         setSupportActionBar(toolbar);
 
 

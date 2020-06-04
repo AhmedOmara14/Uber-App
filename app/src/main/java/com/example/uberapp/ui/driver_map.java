@@ -100,7 +100,7 @@ public class driver_map extends AppCompatActivity {
                         NavigationUI.setupActionBarWithNavController(driver_map.this, navController, mAppBarConfiguration);
                         NavigationUI.setupWithNavController(navigationView, navController);
 
-                        View headerView = navigationView.getHeaderView(0);
+                         headerView = navigationView.getHeaderView(0);
                         circleImageView = headerView.findViewById(R.id.profile_drive);
                         navUsername = (TextView) headerView.findViewById(R.id.name_driver);
                         navphone = (TextView) headerView.findViewById(R.id.phone_driver);
